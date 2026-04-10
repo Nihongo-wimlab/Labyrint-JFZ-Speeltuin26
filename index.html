@@ -30,8 +30,9 @@
 
     <div id="app-shell" class="max-w-md w-full bg-white rounded-3xl p-6 kawaii-shadow border-4 border-pink-200 relative overflow-hidden min-h-[650px] flex flex-col">
         
-        <!-- Header voor Score -->
-        <div id="header-area" class="flex justify-end items-start mb-4 border-b border-pink-100 pb-2">
+        <!-- Header voor Versie en Score -->
+        <div id="header-area" class="flex justify-between items-start mb-4 border-b border-pink-100 pb-2">
+            <div class="text-[10px] font-bold text-pink-300 uppercase tracking-widest">versie 2.0</div>
             <div id="score-display" class="hide bg-yellow-300 px-3 py-0.5 rounded-full font-bold text-yellow-800 text-xs">Score: 0</div>
         </div>
 
@@ -165,11 +166,11 @@
         <!-- RESULTATEN -->
         <div id="results" class="hide flex-grow flex flex-col items-center justify-center py-10">
             <div class="text-7xl mb-6">🏆</div>
-            <h2 class="text-3xl font-black text-pink-500 mb-2">Missie Voltooid!</h2>
+            <h2 class="text-3xl font-black text-pink-500 mb-2 text-center">Missie Voltooid!</h2>
             <div class="text-4xl font-black text-yellow-500 mb-10" id="final-score"></div>
             <div class="space-y-4 w-full">
                 <button onclick="resetGame()" class="w-full bg-blue-500 text-white px-8 py-4 rounded-2xl font-black shadow-lg hover:bg-blue-600 transition-all">NOG EEN RONDJE?</button>
-                <button onclick="switchView('home')" class="w-full bg-gray-200 text-gray-600 px-8 py-4 rounded-2xl font-black hover:bg-gray-300 transition-all uppercase text-[10px] tracking-widest">NAAR STARTPAGINA</button>
+                <button onclick="switchView('home')" class="w-full bg-gray-200 text-gray-600 px-8 py-4 rounded-2xl font-black hover:bg-gray-300 transition-all uppercase text-[10px] tracking-widest text-center">NAAR STARTPAGINA</button>
             </div>
         </div>
     </div>
@@ -177,30 +178,30 @@
     <script>
         const romajiData = {
             'ひとつ': 'hitotsu', 'ふたつ': 'futatsu', 'みっつ': 'mittsu', 'よっつ': 'yottsu', 'いつつ': 'itsutsu', 'むっつ': 'muttsu', 'ななつ': 'nanatsu', 'やっつ': 'yattsu', 'ここのつ': 'kokonotsu', 'とお': 'too',
-            'ひとり': 'hitori', 'ふたり': 'futari', 'さんにん': 'sannin', 'よにん': 'yonin', 'ごにん': 'gonin', 'ろくにん': 'rokunin', 'ななにん': 'nananin', 'はちにん': 'hachinin', 'きゅうにん': 'kyuunin', 'じゅうにん': 'juunin',
+            'ひとり': 'hitori', 'ふたり': 'futari', 'さんにん': 'sannin', 'よにん': 'yonin', 'ごにん': 'gonin', 'ろくにん': 'rokunin', 'ななにん': 'nananin', 'はちにん': 'hachinin', 'きゅうにん': 'kyuunin', 'じゅうin': 'juunin',
             'いっぴき': 'ippiki', 'にひき': 'nihiki', 'さんびき': 'sanbiki', 'よんひき': 'yonhiki', 'ごひき': 'gohiki', 'ろっぴき': 'roppiki', 'ななひき': 'nanahiki', 'はっぴき': 'happiki', 'きゅうひき': 'kyuuhiki', 'じゅっぴき': 'juppiki',
             'いっぽん': 'ippon', 'にhon': 'nihon', 'さんぼん': 'sanbon', 'よんhon': 'yonhon', 'ごhon': 'gohon', 'ろっぽん': 'roppon', 'ななhon': 'nanahon', 'はっぽん': 'happon', 'きゅうhon': 'kyuuhon', 'じゅっぽん': 'juppon',
             'いちまい': 'ichimai', 'にまい': 'nimai', 'さんまい': 'sanmai', 'よんまい': 'yonmai', 'ごまい': 'gomai', 'ろくまい': 'rokumai', 'ななまい': 'nanamai', 'はちまい': 'hachimai', 'きゅうまい': 'kyuumai', 'じゅうまい': 'juumai',
-            'いちだい': 'ichidai', 'にだい': 'nidai', 'さんだい': 'sandai', 'よんだい': 'yondai', 'ごだい': 'godai', 'ろくだい': 'rokudai', 'ななだい': 'nanadai', 'はちだい': 'hachidai', 'きゅうだい': 'kyuudai', 'じゅうだい': 'juudai',
-            'いっとう': 'ittou', 'にとう': 'nitou', 'さんとう': 'santou', 'よんとう': 'yontou', 'ごとう': 'gotou', 'ろくとう': 'rokutou', 'ななとう': 'nanatou', 'はっとう': 'hattou', 'きゅうとう': 'kyuutou', 'じゅっとう': 'juttou',
+            'いちだい': 'ichidai', 'にだい': 'nidai', 'さんだい': 'sandai', 'よんだい': 'yondai', 'ごだい': 'godai', 'ろくだい': 'rokudai', 'nanadai': 'nanadai', 'はちだい': 'hachidai', 'きゅうだい': 'kyuudai', 'じゅうだい': 'juudai',
+            'いっとou': 'ittou', 'にとう': 'nitou', 'さんとう': 'santou', 'よんとう': 'yontou', 'ごとう': 'gotou', 'ろくとう': 'rokutou', 'ななとう': 'nanatou', 'はっとう': 'hattou', 'きゅうとう': 'kyuutou', 'じゅっとう': 'juttou',
             'いっさつ': 'issatsu', 'にさつ': 'nisatsu', 'さんさつ': 'sansatsu', 'よんさつ': 'yonsatsu', 'ごさつ': 'gosatsu', 'ろくさつ': 'rokusatsu', 'ななさつ': 'nanasatsu', 'はっさつ': 'hassatsu', 'きゅうさつ': 'kyuusatsu', 'じゅっさつ': 'jussatsu',
-            'いっこ': 'ikko', 'にこ': 'niko', 'さんこ': 'sanko', 'よんこ': 'yonko', 'ごこ': 'goko', 'ろっこ': 'rokko', 'ななこ': 'nanako', 'はっこ': 'hakko', 'きゅうこ': 'kyuuko', 'じゅっこ': 'jukko',
+            'いっこ': 'ikko', 'にこ': 'niko', 'さんこ': 'sanko', 'よんこ': 'yonko', 'ごこ': 'goko', 'ろっこ': 'rokko', 'ななこ': 'nanako', 'はっこ': 'hakko', 'きゅうko': 'kyuuko', 'じゅっこ': 'jukko',
             'いっぱい': 'ippai', 'にはい': 'nihai', 'さんばい': 'sanbai', 'よんはい': 'yonhai', 'ごはい': 'gohai', 'ろっぱい': 'roppai', 'ななはい': 'nanahai', 'はっぱい': 'happai', 'きゅうはい': 'kyuuhai', 'じゅっぱい': 'juppai',
-            'いっき': 'ikki', 'にき': 'niki', 'さんき': 'sanki', 'よんき': 'yonki', 'ごき': 'goki', 'ろっき': 'rokki', 'ななき': 'nanaki', 'はっき': 'hakki', 'きゅうき': 'kyuuki', 'じゅっき': 'jukki'
+            'いっき': 'ikki', 'にき': 'niki', 'さんki': 'sanki', 'よんki': 'yonki', 'ごき': 'goki', 'ろっき': 'rokki', 'ななki': 'nanaki', 'はっき': 'hakki', 'きゅうki': 'kyuuki', 'じゅっき': 'jukki'
         };
 
         const counterPool = [
             { id: 'tsu', name: 'algemeen', symbols: ['🍎', '📦', '🍬', '⭐', '🍷'], symbolNames: ['appels', 'pakketjes', 'snoepjes', 'sterren', 'glazen'], units: ['ひとつ', 'ふたつ', 'みっつ', 'よっつ', 'いつつ', 'むっつ', 'ななつ', 'やっつ', 'ここのつ', 'とお'], kanji: ['一つ', '二つ', '三つ', '四つ', '五つ', '六つ', '七つ', '八つ', '九つ', '十'], expl: 'De teller <b>~tsu</b> is de algemene teller voor ronde of onregelmatige voorwerpen.' },
-            { id: 'nin', name: 'mensen', symbols: ['👩‍🎓', '🥷', '👮'], symbolNames: ['studenten', 'ninja\'s', 'agenten'], units: ['ひとり', 'ふたり', 'さんにん', 'よにん', 'ごにん', 'ろくにん', 'ななにん', 'はちにん', 'きゅうにん', 'じゅうにん'], kanji: ['一人', '二人', '三人', '四人', '五人', '六人', '七人', '八人', '九人', '十人'], expl: 'Voor mensen gebruik je <b>~nin</b>. Let op 1 (hitori) en 2 (futari)!' },
+            { id: 'nin', name: 'mensen', symbols: ['👩‍🎓', '🥷', '👮'], symbolNames: ['studenten', 'ninja\'s', 'agenten'], units: ['ひとり', 'ふたり', 'さんにん', 'よin', 'ごにん', 'ろくにん', 'ななにん', 'はちにん', 'きゅうにん', 'じゅうにん'], kanji: ['一人', '二人', '三人', '四人', '五人', '六人', '七人', '八人', '九人', '十人'], expl: 'Voor mensen gebruik je <b>~nin</b>. Let op 1 (hitori) en 2 (futari)!' },
             { id: 'hiki', name: 'kleine dieren', symbols: ['🐱', '🐶', '🐭'], symbolNames: ['katten', 'honden', 'muizen'], units: ['いっぴき', 'にひき', 'さんびき', 'よんひき', 'ごひき', 'ろっぴき', 'ななひき', 'はっぴき', 'きゅうひき', 'じゅっぴき'], kanji: ['一匹', '二匹', '三匹', '四匹', '五匹', '六匹', '七匹', '八匹', '九匹', '十匹'], expl: 'Voor kleine dieren gebruik je <b>~hiki</b>.' },
-            { id: 'tou', name: 'grote dieren', symbols: ['🐘', '🐳', '🐎'], symbolNames: ['olifanten', 'walvissen', 'paarden'], units: ['いっとう', 'にとう', 'さんとう', 'よんとう', 'ごとう', 'ろくとう', 'naなとう', 'はっとう', 'きゅうとう', 'じゅっとう'], kanji: ['一頭', '二頭', '三頭', '四頭', '五頭', '六頭', '七頭', '八頭', '九頭', '十頭'], expl: 'Voor <b>grote dieren</b> (olifanten, paarden) gebruik je de teller <b>~tou</b>.' },
-            { id: 'ki', name: 'vliegen/machines', symbols: ['✈️', '🚁', '🛸'], symbolNames: ['vliegtuigen', 'helikopters', 'drones'], units: ['いっき', 'にき', 'さんき', 'よんki', 'ごき', 'ろっき', 'ななき', 'はっき', 'きゅうき', 'じゅっき'], kanji: ['一機', '二機', '三機', '四機', '五機', '六機', '七機', '八機', '九機', '十機'], expl: 'Voor <b>vliegtuigen, helikopters en grote mechanische apparaten</b> gebruik je <b>~ki</b>. Let op: <i>ikki, rokki, hakki</i>!' },
-            { id: 'hon', name: 'lange voorwerpen', symbols: ['✏️', '🍌', '🥫', '🌳'], symbolNames: ['potloden', 'bananen', 'blikjes Red Bull', 'bomen'], units: ['いっぽん', 'にほん', 'さんぼん', 'よんhon', 'ごhon', 'ろっぽん', 'ななhon', 'はっぽん', 'きゅうhon', 'じゅっぽん'], kanji: ['一本', '二本', '三本', '四本', '五本', '六本', '七本', '八本', '九本', '十本'], expl: 'Voor lange, dunne voorwerpen gebruik je <b>~hon</b>.' },
-            { id: 'mai', name: 'platte voorwerpen', symbols: ['📄', '👕', '🍕', '🥪'], symbolNames: ['papiertjes', 'shirts', 'pizza\'s', 'boterhammen'], units: ['いちまい', 'にまい', 'さんまい', 'よんまい', 'ごまい', 'ろくまい', 'ななまい', 'はちまい', 'きゅうまい', 'じゅうまい'], kanji: ['一枚', '二枚', '三枚', '四枚', '五枚', '六枚', '七枚', '八枚', '九枚', '十枚'], expl: 'Voor platte voorwerpen (papier, pizza, shirts) gebruik je <b>~mai</b>.' },
+            { id: 'tou', name: 'grote dieren', symbols: ['🐘', '🐳', '🐎'], symbolNames: ['olifanten', 'walvissen', 'paarden'], units: ['いっとう', 'にとう', 'さんとう', 'よんとう', 'ごとう', 'ろくとう', 'ななとう', 'はっとう', 'きゅうとう', 'じゅっとう'], kanji: ['一頭', '二頭', '三頭', '四頭', '五頭', '六頭', '七頭', '八頭', '九頭', '十頭'], expl: 'Voor <b>grote dieren</b> (olifanten, paarden) gebruik je de teller <b>~tou</b>.' },
+            { id: 'ki', name: 'vliegen/machines', symbols: ['✈️', '🚁', '🛸'], symbolNames: ['vliegtuigen', 'helikopters', 'drones'], units: ['いっき', 'にき', 'さんき', 'よんki', 'ごki', 'ろっき', 'ななki', 'はっき', 'きゅうki', 'じゅっき'], kanji: ['一機', '二機', '三機', '四機', '五機', '六機', '七機', '八機', '九機', '十機'], expl: 'Voor <b>vliegtuigen, helikopters en grote mechanische apparaten</b> gebruik je <b>~ki</b>. Let op: <i>ikki, rokki, hakki</i>!' },
+            { id: 'hon', name: 'lange voorwerpen', symbols: ['✏️', '🍌', '🥫', '🌳'], symbolNames: ['potloden', 'bananen', 'blikjes Red Bull', 'bomen'], units: ['いっぽん', 'にhon', 'さんぼん', 'よんhon', 'ごhon', 'ろっぽん', 'ななhon', 'はっぽん', 'きゅうhon', 'じゅっぽん'], kanji: ['一本', '二本', '三本', '四本', '五本', '六本', '七本', '八本', '九本', '十本'], expl: 'Voor lange, dunne voorwerpen gebruik je <b>~hon</b>.' },
+            { id: 'mai', name: 'platte voorwerpen', symbols: ['📄', '👕', '🍕', '🥪'], symbolNames: ['papiertjes', 'shirts', 'pizza\'s', 'boterhammen'], units: ['いちまい', 'にまい', 'さんまい', 'よんまい', 'ごまい', 'ろくまい', 'naなまい', 'はちまい', 'きゅうまい', 'じゅうまい'], kanji: ['一枚', '二枚', '三枚', '四枚', '五枚', '六枚', '七枚', '八枚', '九枚', '十枚'], expl: 'Voor platte voorwerpen gebruik je <b>~mai</b>.' },
             { id: 'dai', name: 'machines', symbols: ['💻', '📱', '🚗', '🚲'], symbolNames: ['laptops', 'smartphones', 'auto\'s', 'fietsen'], units: ['いちだい', 'にだい', 'さんだい', 'よんだい', 'ごだい', 'ろくだい', 'nanadai', 'はちだい', 'きゅうだい', 'じゅうだい'], kanji: ['一台', '二台', '三台', '四台', '五台', '六台', '七台', '八台', '九台', '十台'], expl: 'Voor machines en voertuigen gebruik je <b>~dai</b>.' },
-            { id: 'hai', name: 'glazen/bekers', symbols: ['🥤', '🍷', '🍜'], symbolNames: ['bubble tea', 'glazen drinken', 'kommen ramen'], units: ['いっぱい', 'にはい', 'さんばい', 'よんはい', 'ごはい', 'ろっぱい', 'ななはい', 'はっぱい', 'きゅうはい', 'じゅっぱい'], kanji: ['一杯', '二杯', '三杯', '四杯', '五杯', '六杯', '七杯', '八杯', '九杯', '十杯'], expl: 'Voor <b>glazen of kommen</b> gebruik je <b>~hai</b>.' },
-            { id: 'satsu', name: 'boeken', symbols: ['📚', '📔'], symbolNames: ['boeken', 'notitieblokken'], units: ['いっさつ', 'にさつ', 'さんさつ', 'よんさつ', 'ごさつ', 'ろくさつ', 'ななさつ', 'はっさつ', 'きゅうさつ', 'じゅっさつ'], kanji: ['一冊', '二冊', '三冊', '四冊', '五冊', '六冊', '七冊', '八冊', '九冊', '十冊'], expl: 'Voor boeken gebruik je <b>~satsu</b>.' },
-            { id: 'ko', name: 'kleine items', symbols: ['🎾', '🍙', '💎'], symbolNames: ['tennisballen', 'onigiri', 'diamanten'], units: ['いっこ', 'にこ', 'さんこ', 'よんこ', 'ごこ', 'ろっこ', 'ななこ', 'はっこ', 'きゅうko', 'じゅっこ'], kanji: ['一個', '二個', '三個', '四個', '五個', '六個', '七個', '八個', '九個', '十個'], expl: 'Voor kleine voorwerpen gebruik je <b>~ko</b>.' }
+            { id: 'hai', name: 'glazen/bekers', symbols: ['🥤', '🍷', '🍜'], symbolNames: ['bubble tea', 'glazen drinken', 'kommen ramen'], units: ['いっぱい', 'にはい', 'さんばい', 'よんはい', 'ごはい', 'ろっぱい', 'naなはい', 'はっぱい', 'きゅうはい', 'じゅっぱい'], kanji: ['一杯', '二杯', '三杯', '四杯', '五杯', '六杯', '七杯', '八杯', '九杯', '十杯'], expl: 'Voor <b>glazen of kommen</b> gebruik je <b>~hai</b>.' },
+            { id: 'satsu', name: 'boeken', symbols: ['📚', '📔'], symbolNames: ['boeken', 'notitieblokken'], units: ['いっさつ', 'にさつ', 'さんさつ', 'よんさつ', 'ごさつ', 'ろくさつ', 'naなさつ', 'はっさつ', 'きゅうさつ', 'じゅっさつ'], kanji: ['一冊', '二冊', '三冊', '四冊', '五冊', '六冊', '七冊', '八冊', '九冊', '十冊'], expl: 'Voor boeken gebruik je <b>~satsu</b>.' },
+            { id: 'ko', name: 'kleine items', symbols: ['🎾', '🍙', '💎'], symbolNames: ['tennisballen', 'onigiri', 'diamanten'], units: ['いっこ', 'にこ', 'さんこ', 'よんこ', 'ごこ', 'ろっこ', 'naなo', 'はっこ', 'きゅうko', 'じゅっこ'], kanji: ['一個', '二個', '三個', '四個', '五個', '六個', '七個', '八個', '九個', '十個'], expl: 'Voor kleine voorwerpen gebruik je <b>~ko</b>.' }
         ];
 
         const database = [];
