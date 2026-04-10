@@ -1,0 +1,335 @@
+¥<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kawaii Counter Quest - Japanse Tellers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #fce4ec;
+            background-image: radial-gradient(#f8bbd0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .kawaii-shadow {
+            box-shadow: 0 8px 0px rgba(0,0,0,0.1);
+        }
+        .bounce {
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        /* Gebruik een krachtige klasse om elementen echt te verbergen */
+        .hide { display: none !important; }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div id="app-shell" class="max-w-md w-full bg-white rounded-3xl p-6 kawaii-shadow border-4 border-pink-200 relative overflow-hidden min-h-[650px] flex flex-col">
+        
+        <!-- Header voor Score -->
+        <div id="header-area" class="flex justify-end items-start mb-4 border-b border-pink-100 pb-2">
+            <div id="score-display" class="hide bg-yellow-300 px-3 py-0.5 rounded-full font-bold text-yellow-800 text-xs">Score: 0</div>
+        </div>
+
+        <!-- VIEW 1: STARTPAGINA -->
+        <div id="view-home" class="flex-grow flex flex-col items-center justify-center text-center">
+            <div class="text-6xl mb-4 text-bounce">🍱</div>
+            <h1 class="text-3xl font-black text-pink-500 mb-2 leading-tight">Kawaii Counter Quest</h1>
+            <p class="text-gray-500 font-bold italic mb-8">Klaar voor je Japanse missie?</p>
+            
+            <div class="grid gap-4 w-full mb-12">
+                <button onclick="switchView('explanation')" class="bg-purple-500 text-white p-5 rounded-2xl font-black shadow-lg hover:bg-purple-600 transition-all flex items-center justify-center gap-3">
+                    <span class="text-2xl">💡</span> Hoe werkt dat tellen?
+                </button>
+                <button onclick="startRound()" class="bg-pink-500 text-white p-5 rounded-2xl font-black shadow-lg hover:bg-pink-600 transition-all flex items-center justify-center gap-3">
+                    <span class="text-2xl">🎮</span> Start de Oefen-Quest
+                </button>
+            </div>
+
+            <footer class="text-[10px] font-bold text-pink-300 uppercase tracking-tighter w-full text-center">
+                © w.oostindier@gemini-wimlab
+            </footer>
+        </div>
+
+        <!-- VIEW 2: UITLEG MODULE -->
+        <div id="view-explanation" class="hide flex-grow flex flex-col">
+            <h2 class="text-2xl font-black text-purple-600 mb-4 flex items-center gap-2">
+                <button onclick="switchView('home')" class="text-gray-400 hover:text-gray-600">←</button>
+                Teller-Gids
+            </h2>
+            
+            <div class="flex-grow overflow-y-auto pr-2 space-y-6 text-sm">
+                <section>
+                    <h3 class="font-black text-pink-500 text-base mb-1 text-left">De basis: Hoe zeg je het?</h3>
+                    <p class="text-gray-600 bg-pink-50 p-3 rounded-xl border border-pink-100 italic text-left">
+                        In het Japans plak je een "teller" achter het getal. Het is niet "drie honden", maar "hond + drie + teller-voor-dieren".
+                    </p>
+                </section>
+
+                <section>
+                    <h3 class="font-black text-pink-500 text-base mb-2 text-center underline decoration-pink-200">De Meest Gebruikte Tellers</h3>
+                    <div class="grid gap-2 text-[13px]">
+                        <div class="bg-white border-2 border-blue-100 p-3 rounded-xl">
+                            <b>~tsu (つ):</b> Algemeen (appels, sterren, glazen). 
+                        </div>
+                        <div class="bg-white border-2 border-green-100 p-3 rounded-xl">
+                            <b>~nin (人):</b> Mensen (<i>hitori, futari</i>).
+                        </div>
+                        <div class="bg-white border-2 border-yellow-100 p-3 rounded-xl">
+                            <b>~mai (枚):</b> Platte dingen (shirts, pizza, boterhammen). 
+                        </div>
+                        <div class="bg-white border-2 border-red-100 p-3 rounded-xl">
+                            <b>~hon (本):</b> Lange dingen (pennen, bananen, bomen).
+                        </div>
+                        <div class="bg-white border-2 border-purple-100 p-3 rounded-xl">
+                            <b>~hiki (匹):</b> Kleine dieren (katten, vissen).
+                        </div>
+                        <div class="bg-white border-2 border-orange-100 p-3 rounded-xl">
+                            <b>~dai (台):</b> Machines & voertuigen (computers, auto's).
+                        </div>
+                        <div class="bg-white border-2 border-indigo-100 p-3 rounded-xl">
+                            <b>~tou (頭):</b> Grote dieren (olifanten, paarden).
+                        </div>
+                        <div class="bg-white border-2 border-cyan-100 p-3 rounded-xl">
+                            <b>~hai (杯):</b> Glazen drinken, bekers bubble tea.
+                        </div>
+                        <div class="bg-white border-2 border-teal-100 p-3 rounded-xl">
+                            <b>~satsu (冊):</b> Gebonden boeken of manga.
+                        </div>
+                        <div class="bg-white border-2 border-pink-100 p-3 rounded-xl">
+                            <b>~ko (個):</b> Kleine, losse objecten (gummetjes).
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bg-yellow-50 p-4 rounded-2xl border-2 border-dashed border-yellow-400">
+                    <h3 class="font-black text-yellow-700 text-base mb-1 flex items-center gap-2">
+                        🆘 Help! Ik ben de teller vergeten!
+                    </h3>
+                    <p class="text-gray-700 leading-relaxed text-left">
+                        Geen paniek! Gebruik de algemene <b>~tsu</b> teller als backup. Voor kleine objecten is <b>~ko</b> ook een veilige keuze.
+                    </p>
+                </section>
+            </div>
+            
+            <button onclick="startRound()" class="mt-4 bg-pink-500 text-white p-4 rounded-xl font-black shadow-md hover:bg-pink-600 transition-all">Nu gaan oefenen! ✨</button>
+        </div>
+
+        <!-- VIEW 3: GAME VIEW -->
+        <div id="view-game" class="hide flex-grow flex flex-col">
+            <div id="progress-container" class="mb-6">
+                <div class="flex justify-between items-end mb-2">
+                    <span id="question-count-text" class="text-xs font-black text-pink-400 uppercase tracking-widest">Vraag 1 / 10</span>
+                    <span id="percent-text" class="text-xs font-bold text-pink-300">0%</span>
+                </div>
+                <div class="w-full bg-pink-100 h-4 rounded-full">
+                    <div id="progress" class="bg-pink-400 h-4 rounded-full transition-all duration-500" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div id="game-container" class="flex-grow flex flex-col">
+                <div id="question-card" class="text-center mb-6">
+                    <p id="instruction" class="text-gray-600 font-bold mb-4 italic text-lg leading-tight">Hoeveel ... zie je?</p>
+                    <div id="visual-area" class="bg-blue-50 rounded-2xl p-6 mb-6 flex flex-wrap justify-center items-center gap-4 min-h-[160px] border-2 border-dashed border-blue-200 overflow-y-auto max-h-[180px]"></div>
+                    <div class="relative h-12 mb-4">
+                        <p id="kanji-hint" class="text-3xl font-bold text-gray-800 tracking-widest"></p>
+                        <p id="cheat-text" class="absolute inset-0 flex items-center justify-center text-xl font-bold text-pink-500 bg-white bg-opacity-90 opacity-0 transition-opacity duration-300 pointer-events-none"></p>
+                    </div>
+                    <button id="cheat-btn" class="bg-purple-100 hover:bg-purple-200 text-purple-600 px-4 py-2 rounded-xl text-sm font-bold transition-colors flex items-center mx-auto gap-2 border-2 border-purple-200">
+                        <span>✨ Spieken! (4s)</span>
+                    </button>
+                </div>
+                <div id="options" class="grid grid-cols-2 gap-4"></div>
+                <p class="text-center text-[10px] text-gray-400 mt-4 italic font-bold">1x klik = Romaji • 2x klik = Bevestigen</p>
+            </div>
+        </div>
+
+        <!-- FEEDBACK MODAL -->
+        <div id="feedback" class="hide absolute inset-0 bg-white bg-opacity-98 flex flex-col items-center justify-center p-8 text-center z-50">
+            <div id="feedback-icon" class="text-6xl mb-4"></div>
+            <h2 id="feedback-title" class="text-2xl font-black mb-2"></h2>
+            <div id="feedback-content" class="mb-6">
+                <p id="feedback-msg-main" class="text-gray-600"></p>
+                <div id="feedback-explanation" class="mt-4 p-4 bg-pink-50 rounded-2xl text-pink-700 text-xs border border-pink-100 italic text-left"></div>
+            </div>
+            <button onclick="nextQuestion()" class="bg-pink-500 text-white px-8 py-3 rounded-2xl font-black shadow-lg hover:bg-pink-600 w-full transition-all">VOLGENDE ✨</button>
+        </div>
+
+        <!-- RESULTATEN -->
+        <div id="results" class="hide flex-grow flex flex-col items-center justify-center py-10">
+            <div class="text-7xl mb-6">🏆</div>
+            <h2 class="text-3xl font-black text-pink-500 mb-2">Missie Voltooid!</h2>
+            <div class="text-4xl font-black text-yellow-500 mb-10" id="final-score"></div>
+            <div class="space-y-4 w-full">
+                <button onclick="resetGame()" class="w-full bg-blue-500 text-white px-8 py-4 rounded-2xl font-black shadow-lg hover:bg-blue-600 transition-all">NOG EEN RONDJE?</button>
+                <button onclick="switchView('home')" class="w-full bg-gray-200 text-gray-600 px-8 py-4 rounded-2xl font-black hover:bg-gray-300 transition-all uppercase text-[10px] tracking-widest">NAAR STARTPAGINA</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const romajiData = {
+            'ひとつ': 'hitotsu', 'ふたつ': 'futatsu', 'みっつ': 'mittsu', 'よっつ': 'yottsu', 'いつつ': 'itsutsu', 'むっつ': 'muttsu', 'ななつ': 'nanatsu', 'やっつ': 'yattsu', 'ここのつ': 'kokonotsu', 'とお': 'too',
+            'ひとり': 'hitori', 'ふたり': 'futari', 'さんにん': 'sannin', 'よにん': 'yonin', 'ごにん': 'gonin', 'ろくにん': 'rokunin', 'ななにん': 'nananin', 'はちにん': 'hachinin', 'きゅうにん': 'kyuunin', 'じゅうにん': 'juunin',
+            'いっぴき': 'ippiki', 'にひき': 'nihiki', 'さんびき': 'sanbiki', 'よんひき': 'yonhiki', 'ごひき': 'gohiki', 'ろっぴき': 'roppiki', 'ななひき': 'nanahiki', 'はっぴき': 'happiki', 'きゅうひき': 'kyuuhiki', 'じゅっぴき': 'juppiki',
+            'いっぽん': 'ippon', 'にほん': 'nihon', 'さんぼん': 'sanbon', 'よんほん': 'yonhon', 'ごほん': 'gohon', 'ろっぽん': 'roppon', 'naなほん': 'nanahon', 'はっぽん': 'happon', 'きゅうほん': 'kyuuhon', 'じゅっぽん': 'juppon',
+            'いちまい': 'ichimai', 'にまい': 'nimai', 'さんまい': 'sanmai', 'よんまい': 'yonmai', 'ごまい': 'gomai', 'ろくまい': 'rokumai', 'ななまい': 'nanamai', 'はちまい': 'hachimai', 'きゅうまい': 'kyuumai', 'じゅうまい': 'juumai',
+            'いちだい': 'ichidai', 'にだい': 'nidai', 'さんだい': 'sandai', 'よんだい': 'yondai', 'ごだい': 'godai', 'ろくだい': 'rokudai', 'ななだい': 'nanadai', 'はちだい': 'hachidai', 'きゅうだい': 'kyuudai', 'じゅうだい': 'juudai',
+            'いっとう': 'ittou', 'にとう': 'nitou', 'さんとう': 'santou', 'よんとう': 'yontou', 'ごとう': 'gotou', 'ろくとう': 'rokutou', 'ななとう': 'nanatou', 'はっとう': 'hattou', 'きゅうとう': 'kyuutou', 'じゅっとう': 'juttou',
+            'いっさつ': 'issatsu', 'にさつ': 'nisatsu', 'さんさつ': 'sansatsu', 'よんさつ': 'yonsatsu', 'ごさつ': 'gosatsu', 'ろくさつ': 'rokusatsu', 'ななさつ': 'nanasatsu', 'はっさつ': 'hassatsu', 'きゅうさつ': 'kyuusatsu', 'じゅっさつ': 'jussatsu',
+            'いっこ': 'ikko', 'にこ': 'niko', 'さんこ': 'sanko', 'よんこ': 'yonko', 'ごこ': 'goko', 'ろっこ': 'rokko', 'ななこ': 'nanako', 'はっこ': 'hakko', 'きゅうko': 'kyuuko', 'じゅっこ': 'jukko',
+            'いっぱい': 'ippai', 'にはい': 'nihai', 'さんばい': 'sanbai', 'よんはい': 'yonhai', 'ごはい': 'gohai', 'ろっぱい': 'roppai', 'ななはい': 'nanahai', 'はっぱい': 'happai', 'きゅうはい': 'kyuuhai', 'じゅっぱい': 'juppai'
+        };
+
+        const counterPool = [
+            { id: 'tsu', name: 'algemeen', symbols: ['🍎', '📦', '🍬', '⭐', '🍷'], symbolNames: ['appels', 'pakketjes', 'snoepjes', 'sterren', 'glazen'], units: ['ひとつ', 'ふたつ', 'みっつ', 'よっつ', 'いつつ', 'むっつ', 'ななつ', 'やっつ', 'ここのつ', 'とお'], kanji: ['一つ', '二つ', '三つ', '四つ', '五つ', '六つ', '七つ', '八つ', '九つ', '十'], expl: 'De teller <b>~tsu</b> is de algemene teller voor ronde of onregelmatige voorwerpen.' },
+            { id: 'nin', name: 'mensen', symbols: ['👩‍🎓', '🥷', '👮'], symbolNames: ['studenten', 'ninja\'s', 'agenten'], units: ['ひとり', 'ふたり', 'さんにん', 'よにん', 'ごにん', 'ろくにん', 'ななにん', 'はちにん', 'きゅうにん', 'じゅうにん'], kanji: ['一人', '二人', '三人', '四人', '五人', '六人', '七人', '八人', '九人', '十人'], expl: 'Voor mensen gebruik je <b>~nin</b>. Let op 1 (hitori) en 2 (futari)!' },
+            { id: 'hiki', name: 'kleine dieren', symbols: ['🐱', '🐶', '🐭'], symbolNames: ['katten', 'honden', 'muizen'], units: ['いっぴき', 'にひき', 'さんびき', 'よんひき', 'ごひき', 'ろっぴき', '나なひき', 'はっぴき', 'きゅうひき', 'じゅっぴき'], kanji: ['一匹', '二匹', '三匹', '四匹', '五匹', '六匹', '七匹', '八匹', '九匹', '十匹'], expl: 'Voor kleine dieren gebruik je <b>~hiki</b>.' },
+            { id: 'tou', name: 'grote dieren', symbols: ['🐘', '🐳', '🐎'], symbolNames: ['olifanten', 'walvissen', 'paarden'], units: ['いっとう', 'にとう', 'さんとう', 'よんとう', 'ごとう', 'ろくとう', 'ななとう', 'はっとう', 'きゅうとう', 'じゅっとう'], kanji: ['一頭', '二頭', '三頭', '四頭', '五頭', '六頭', '七頭', '八頭', '九頭', '十頭'], expl: 'Voor <b>grote dieren</b> gebruik je de teller <b>~tou</b>.' },
+            { id: 'hon', name: 'lange voorwerpen', symbols: ['✏️', '🍌', '🥫', '🌳'], symbolNames: ['potloden', 'bananen', 'blikjes Red Bull', 'bomen'], units: ['いっぽん', 'にほん', 'さんぼん', 'よんほん', 'ごほん', 'ろっぽん', 'ななhon', 'はっぽん', 'きゅうhon', 'じゅっぽん'], kanji: ['一本', '二本', '三本', '四本', '五本', '六本', '七本', '八本', '九本', '十本'], expl: 'Voor lange, dunne voorwerpen gebruik je <b>~hon</b>.' },
+            { id: 'mai', name: 'platte voorwerpen', symbols: ['📄', '👕', '🍕', '🥪'], symbolNames: ['papiertjes', 'shirts', 'pizza\'s', 'boterhammen'], units: ['いちまい', 'にまい', 'さんまい', 'よんまい', 'ごまい', 'ろくまい', 'ななまい', 'はちまい', 'きゅうまい', 'じゅうまい'], kanji: ['一枚', '二枚', '三枚', '四枚', '五枚', '六枚', '七枚', '八枚', '九枚', '十枚'], expl: 'Voor platte voorwerpen gebruik je <b>~mai</b>.' },
+            { id: 'dai', name: 'machines', symbols: ['💻', '📱', '🚗', '🚲'], symbolNames: ['laptops', 'smartphones', 'auto\'s', 'fietsen'], units: ['いちだい', 'にだい', 'さんだい', 'よんだい', 'ごだい', 'ろくだい', 'nanadai', 'はちだい', 'きゅうだい', 'じゅうだい'], kanji: ['一台', '二台', '三台', '四台', '五台', '六台', '七台', '八台', '九台', '十台'], expl: 'Voor machines en voertuigen gebruik je <b>~dai</b>.' },
+            { id: 'hai', name: 'glazen/bekers', symbols: ['🥤', '🍷', '🍜'], symbolNames: ['bubble tea', 'glazen drinken', 'kommen ramen'], units: ['いっぱい', 'にはい', 'さんばい', 'よんはい', 'ごはい', 'ろっぱい', 'ななはい', 'はっぱい', 'きゅうはい', 'じゅっぱい'], kanji: ['一杯', '二杯', '三杯', '四杯', '五杯', '六杯', '七杯', '八杯', '九杯', '十杯'], expl: 'Voor <b>glazen of kommen</b> gebruik je <b>~hai</b>.' },
+            { id: 'satsu', name: 'boeken', symbols: ['📚', '📔'], symbolNames: ['boeken', 'notitieblokken'], units: ['いっさつ', 'にさつ', 'さんさつ', 'よんさつ', 'ごさつ', 'ろくさつ', 'ななさつ', 'はっさつ', 'きゅうさつ', 'じゅっさつ'], kanji: ['一冊', '二冊', '三冊', '四冊', '五冊', '六冊', '七冊', '八冊', '九冊', '十冊'], expl: 'Voor boeken gebruik je <b>~satsu</b>.' },
+            { id: 'ko', name: 'kleine items', symbols: ['🎾', '🍙', '💎'], symbolNames: ['tennisballen', 'onigiri', 'diamanten'], units: ['いっこ', 'にこ', 'さんこ', 'よんこ', 'ごこ', 'ろっこ', 'ななこ', 'はっこ', 'きゅうこ', 'じゅっこ'], kanji: ['一個', '二個', '三個', '四個', '五個', '六個', '七個', '八個', '九個', '十個'], expl: 'Voor kleine voorwerpen gebruik je <b>~ko</b>.' }
+        ];
+
+        const database = [];
+        counterPool.forEach(cat => {
+            for(let i=1; i<=10; i++){
+                cat.symbols.forEach((s, idx) => {
+                    database.push({ items: s, itemName: cat.symbolNames[idx], count: i, counterType: cat.id, kanji: cat.kanji[i-1], hiragana: cat.units[i-1], explanation: cat.expl });
+                });
+            }
+        });
+
+        let questions = [], currentIdx = 0, score = 0, canAnswer = true, lastBtn = null;
+
+        function switchView(viewId) {
+            // Verberg alle views
+            ['home', 'explanation', 'game', 'results'].forEach(v => {
+                const el = document.getElementById(v === 'results' ? 'results' : 'view-' + v);
+                if(el) el.classList.add('hide');
+            });
+            
+            // Toon de gevraagde view
+            const target = document.getElementById(viewId === 'results' ? 'results' : 'view-' + viewId);
+            if(target) target.classList.remove('hide');
+
+            // Scoreboard handling
+            const scoreDisp = document.getElementById('score-display');
+            if(scoreDisp) scoreDisp.classList.toggle('hide', viewId !== 'game');
+            
+            // Altijd header laten zien op startpagina en game
+            const headArea = document.getElementById('header-area');
+            if(headArea) headArea.classList.remove('hide');
+        }
+
+        function startRound() {
+            switchView('game');
+            questions = [...database].sort(() => Math.random() - 0.5).slice(0, 10);
+            currentIdx = 0; score = 0;
+            const scoreDisp = document.getElementById('score-display');
+            if(scoreDisp) scoreDisp.textContent = `Score: 0`;
+            initQuestion();
+        }
+
+        function initQuestion() {
+            const q = questions[currentIdx];
+            if(!q) return;
+            canAnswer = true; lastBtn = null;
+            document.getElementById('feedback').classList.add('hide');
+            document.getElementById('progress').style.width = `${(currentIdx / 10) * 100}%`;
+            document.getElementById('question-count-text').textContent = `Vraag ${currentIdx+1} / 10`;
+            document.getElementById('instruction').textContent = `Hoeveel ${q.itemName} zie je?`;
+            
+            const area = document.getElementById('visual-area');
+            area.innerHTML = '';
+            for(let i=0; i<q.count; i++){
+                const s = document.createElement('span'); s.textContent = q.items;
+                s.className = 'text-4xl bounce inline-block m-1'; s.style.animationDelay = `${i*0.05}s`;
+                area.appendChild(s);
+            }
+            document.getElementById('kanji-hint').textContent = q.kanji;
+            document.getElementById('cheat-text').textContent = q.hiragana;
+            document.getElementById('cheat-text').classList.add('opacity-0');
+            generateOptions(q);
+        }
+
+        function generateOptions(q) {
+            const grid = document.getElementById('options'); grid.innerHTML = '';
+            const cat = counterPool.find(c => c.id === q.counterType);
+            if(!cat) return;
+            let choices = [q.hiragana];
+            while(choices.length < 4) {
+                const r = cat.units[Math.floor(Math.random()*10)];
+                if(!choices.includes(r)) choices.push(r);
+            }
+            choices.sort(() => Math.random()-0.5).forEach(choice => {
+                const btn = document.createElement('button');
+                btn.className = "bg-white border-2 border-pink-200 p-3 rounded-2xl font-bold text-lg text-gray-700 transition-all flex flex-col items-center justify-center min-h-[75px]";
+                btn.innerHTML = `<span>${choice}</span>`;
+                btn.onclick = () => {
+                    if(!canAnswer) return;
+                    if(lastBtn === btn) { checkAnswer(choice, btn); return; }
+                    if(lastBtn) { 
+                        lastBtn.classList.remove('border-pink-500','bg-pink-50'); 
+                        lastBtn.innerHTML = `<span>${lastBtn.dataset.val}</span>`; 
+                    }
+                    btn.dataset.val = choice;
+                    btn.innerHTML = `<span class="text-pink-500 text-[10px] uppercase mb-1">Romaji</span><span>${romajiData[choice] || '...'}</span>`;
+                    btn.classList.add('border-pink-500','bg-pink-50'); lastBtn = btn;
+                    setTimeout(() => { if(canAnswer && lastBtn === btn) btn.innerHTML = `<span>${choice}</span>`; }, 1000);
+                };
+                grid.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(choice, btn) {
+            canAnswer = false; const q = questions[currentIdx];
+            const ok = choice === q.hiragana;
+            if(ok) { 
+                score += 10; 
+                const scoreDisp = document.getElementById('score-display');
+                if(scoreDisp) scoreDisp.textContent = `Score: ${score}`; 
+            }
+            else btn.classList.add('bg-red-100', 'border-red-400');
+            
+            document.getElementById('feedback-icon').textContent = ok ? '✨' : '💢';
+            document.getElementById('feedback-title').textContent = ok ? 'Geweldig!' : 'Oeps!';
+            document.getElementById('feedback-msg-main').innerHTML = `<div class="text-2xl font-black text-pink-500">${q.hiragana}</div><div class="text-[10px] text-gray-400">(${romajiData[q.hiragana] || '...'})</div>`;
+            document.getElementById('feedback-explanation').innerHTML = q.explanation;
+            document.getElementById('feedback').classList.remove('hide');
+        }
+
+        function nextQuestion() {
+            // ALTIJD feedback modal verbergen
+            document.getElementById('feedback').classList.add('hide');
+            
+            currentIdx++;
+            if(currentIdx < 10) {
+                initQuestion();
+            } else { 
+                // Gebruik de switchView functie voor een consistente overgang
+                switchView('results');
+                document.getElementById('final-score').textContent = `${score} Punten!`;
+            }
+        }
+
+        function resetGame() { startRound(); }
+
+        document.getElementById('cheat-btn').onclick = () => {
+            const t = document.getElementById('cheat-text'); t.classList.remove('opacity-0');
+            document.getElementById('cheat-btn').disabled = true;
+            setTimeout(() => { t.classList.add('opacity-0'); document.getElementById('cheat-btn').disabled = false; }, 4000);
+        };
+
+        window.onload = () => switchView('home');
+    </script>
+</body>
+</html>
